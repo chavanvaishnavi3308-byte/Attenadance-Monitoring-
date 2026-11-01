@@ -1,0 +1,17 @@
+# Dependencies
+node_modules/
+
+# Python cache & bytecode
+__pycache__/
+*.pyc
+*.pyo
+
+# OS and Editor Files
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+
+# Logs and temporary files
+*.log

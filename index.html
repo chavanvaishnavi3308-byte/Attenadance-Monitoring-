@@ -1,0 +1,1961 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AttendX – Smart Attendance Monitoring & Parent Notification System</title>
+  <meta name="description"
+    content="Next-generation 3D smart-campus attendance monitoring platform connecting teachers, students, and parents in real time.">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap"
+    rel="stylesheet">
+
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+  <!-- Dynamic Cyber Canvas Background -->
+  <canvas id="cyberCanvas"></canvas>
+
+  <!-- Toast Notification Container -->
+  <div id="toast-container"></div>
+
+  <!-- =========================================================================
+       1. LANDING PAGE VIEW
+       ========================================================================= -->
+  <div id="view-landing">
+    <!-- Navigation Bar -->
+    <header class="landing-nav">
+      <a href="#" class="brand-logo" onclick="switchView('landing')">
+        <div class="brand-icon-box">
+          <i data-lucide="shield-check" style="color:var(--cyan); width:24px; height:24px;"></i>
+        </div>
+        <div>
+          <span class="brand-name">Attend<span style="color:var(--cyan);">X</span></span>
+          <span class="brand-tag">SMART CAMPUS</span>
+        </div>
+      </a>
+
+      <ul class="landing-nav-links">
+        <li><a href="#features">Features</a></li>
+        <li><a href="#how-it-works">How It Works</a></li>
+        <li><a href="#roles">Portals</a></li>
+        <li><a href="#simulator">Live Demo</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ul>
+
+      <div style="display:flex; align-items:center; gap:14px;">
+        <button class="btn btn-ghost" onclick="openLoginModal('admin')">
+          <i data-lucide="log-in" style="width:16px;height:16px;"></i> Sign In
+        </button>
+        <button class="btn btn-cyan" onclick="openLoginModal('teacher')">
+          <i data-lucide="sparkles" style="width:16px;height:16px;"></i> Launch Portal
+        </button>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <div class="hero-text-content">
+        <div class="hero-pill-badge">
+          <span class="hero-pill-dot"></span>
+          <span>CAMPUS CYBERNETICS • REVOLUTIONIZING EDUCATION</span>
+        </div>
+
+        <h1 class="hero-title">
+          Attendance.<br>
+          <span class="text-gradient">Awareness. Action.</span>
+        </h1>
+
+        <p class="hero-subtitle">
+          Smart attendance tracking that keeps teachers, students, and parents connected in real time with automated
+          instant alerts, 3D holographic insights, and predictive threshold monitoring.
+        </p>
+
+        <div class="hero-actions">
+          <button class="btn btn-cyan" style="padding:14px 28px; font-size:1.05rem;" onclick="openLoginModal('admin')">
+            <i data-lucide="zap" style="width:18px;height:18px;"></i> Get Started Free
+          </button>
+          <button class="btn btn-ghost" style="padding:14px 24px; font-size:1.05rem;"
+            onclick="document.getElementById('simulator').scrollIntoView({behavior:'smooth'})">
+            <i data-lucide="play-circle" style="width:18px;height:18px;"></i> Test Live Simulator
+          </button>
+        </div>
+
+        <!-- Animated Live Statistics -->
+        <div class="hero-stats-row">
+          <div class="hero-stat-item">
+            <h3>98%</h3>
+            <p>Attendance Accuracy</p>
+          </div>
+          <div class="hero-stat-item">
+            <h3>1,250+</h3>
+            <p>Active Students</p>
+          </div>
+          <div class="hero-stat-item">
+            <h3>45+</h3>
+            <p>Smart Classes</p>
+          </div>
+          <div class="hero-stat-item">
+            <h3>&lt; 1s</h3>
+            <p>Real-Time Alerts</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3D Floating Attendance Mockup -->
+      <div class="hero-visual-container">
+        <div class="hero-mockup-wrapper">
+          <img src="assets/campus_hero.jpg" alt="AttendX 3D Smart Campus" class="mockup-main-image" />
+
+          <!-- Floating Card 1: Attendance Gauge -->
+          <div class="floating-card floating-card-1 glow-border-top">
+            <div style="display:flex; align-items:center; gap:12px;">
+              <div
+                style="width:40px;height:40px;border-radius:50%;background:rgba(0,240,255,0.15);border:1px solid var(--cyan);display:flex;align-items:center;justify-content:center;color:var(--cyan);">
+                <i data-lucide="activity" style="width:20px;height:20px;"></i>
+              </div>
+              <div>
+                <div style="font-size:0.75rem; color:var(--text-muted); text-transform:uppercase;">Campus Presence</div>
+                <div style="font-size:1.25rem; font-weight:800; color:var(--cyan);">92.4% Average</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Floating Card 2: Student Card -->
+          <div class="floating-card floating-card-2">
+            <div style="display:flex; align-items:center; gap:12px;">
+              <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80"
+                style="width:44px; height:44px; border-radius:50%; border:2px solid var(--cyan); object-fit:cover;" />
+              <div>
+                <div style="font-weight:700; font-size:0.95rem; color:#FFFFFF;">Vaishnavi Chavan</div>
+                <div style="font-size:0.75rem; color:var(--amber); font-weight:600;">🔥 16-Day Streak Active</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Floating Card 3: Real-Time Alert -->
+          <div class="floating-card floating-card-3" style="border-color:var(--coral);">
+            <div style="display:flex; align-items:center; gap:10px;">
+              <div
+                style="width:10px;height:10px;border-radius:50%;background:var(--coral);box-shadow:0 0 10px var(--coral);">
+              </div>
+              <div>
+                <div style="font-size:0.75rem; color:#FFFFFF; font-weight:700;">Parent Notification Dispatched</div>
+                <div style="font-size:0.7rem; color:var(--text-muted);">SMS & App Alert Delivered</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Key Features Section -->
+    <section id="features" class="section-wrapper">
+      <div class="section-header">
+        <span class="badge badge-cyan" style="margin-bottom:12px;">INTELLIGENT CAMPUS ARCHITECTURE</span>
+        <h2>Designed for Complete Awareness</h2>
+        <p>Engineered to replace slow administrative spreadsheets with an autonomous, high-transparency control network.
+        </p>
+      </div>
+
+      <div class="features-grid">
+        <div class="glass-card feature-box glow-border-top">
+          <div class="feature-icon-box"
+            style="background:rgba(0,240,255,0.1); border:1px solid var(--cyan); color:var(--cyan);">
+            <i data-lucide="check-check"></i>
+          </div>
+          <h3>1-Click Attendance Take</h3>
+          <p style="color:var(--text-secondary); font-size:0.92rem;">Teachers mark full classroom rosters in under 20
+            seconds with quick "Mark All Present" baseline and rapid status toggles.</p>
+        </div>
+
+        <div class="glass-card feature-box glow-border-top">
+          <div class="feature-icon-box"
+            style="background:rgba(239,68,68,0.1); border:1px solid var(--coral); color:var(--coral);">
+            <i data-lucide="bell-ring"></i>
+          </div>
+          <h3>Instant Parent Notifications</h3>
+          <p style="color:var(--text-secondary); font-size:0.92rem;">Parents receive immediate alerts the second their
+            child is marked absent or late, eliminating semester-end surprises.</p>
+        </div>
+
+        <div class="glass-card feature-box glow-border-top">
+          <div class="feature-icon-box"
+            style="background:rgba(245,158,11,0.1); border:1px solid var(--amber); color:var(--amber);">
+            <i data-lucide="alert-triangle"></i>
+          </div>
+          <h3>Autonomous &lt;75% Risk Guard</h3>
+          <p style="color:var(--text-secondary); font-size:0.92rem;">Automatic debarment prevention flags students
+            approaching critical cutoffs with recovery projections.</p>
+        </div>
+
+        <div class="glass-card feature-box glow-border-top">
+          <div class="feature-icon-box"
+            style="background:rgba(139,92,246,0.1); border:1px solid var(--violet); color:var(--violet);">
+            <i data-lucide="bar-chart-3"></i>
+          </div>
+          <h3>Holographic Analytics</h3>
+          <p style="color:var(--text-secondary); font-size:0.92rem;">Class-to-class comparisons, subject radars, and
+            departmental attendance trends rendered in glowing neon visuals.</p>
+        </div>
+
+        <div class="glass-card feature-box glow-border-top">
+          <div class="feature-icon-box"
+            style="background:rgba(16,185,129,0.1); border:1px solid var(--emerald); color:var(--emerald);">
+            <i data-lucide="flame"></i>
+          </div>
+          <h3>Gamified Student Streaks</h3>
+          <p style="color:var(--text-secondary); font-size:0.92rem;">Boost student motivation with daily attendance
+            streaks, subject progress meters, and personal lecture agendas.</p>
+        </div>
+
+        <div class="glass-card feature-box glow-border-top">
+          <div class="feature-icon-box"
+            style="background:rgba(56,189,248,0.1); border:1px solid #38BDF8; color:#38BDF8;">
+            <i data-lucide="file-spreadsheet"></i>
+          </div>
+          <h3>Audit-Ready Reports</h3>
+          <p style="color:var(--text-secondary); font-size:0.92rem;">Filter by semester, branch, or individual student.
+            Export verified transcripts via clean physical print or CSV data.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Role-Based Portals Showcase -->
+    <section id="roles" class="section-wrapper" style="background:rgba(6,10,26,0.5);">
+      <div class="section-header">
+        <span class="badge badge-cyan" style="margin-bottom:12px;">MULTI-PERSONA CAPABILITIES</span>
+        <h2>Select Your Operational Role</h2>
+        <p>Experience custom tailored glassmorphic control interfaces for every stakeholder in the smart campus.</p>
+      </div>
+
+      <div class="role-showcase-grid">
+        <!-- Admin -->
+        <div class="glass-card role-card-item" onclick="openLoginModal('admin')">
+          <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:16px;">
+            <div
+              style="width:48px;height:48px;border-radius:12px;background:rgba(0,240,255,0.15);border:1px solid var(--cyan);display:flex;align-items:center;justify-content:center;color:var(--cyan);">
+              <i data-lucide="crown"></i>
+            </div>
+            <span class="badge badge-cyan">ADMIN</span>
+          </div>
+          <h3 style="font-size:1.2rem; margin-bottom:8px;">Campus Command</h3>
+          <p style="font-size:0.85rem; color:var(--text-secondary); margin-bottom:16px;">Institutional KPIs, manage
+            1,250+ students, audit logs, and trigger university-wide broadcasts.</p>
+          <div class="text-cyan" style="font-size:0.85rem; font-weight:600; display:flex; align-items:center; gap:6px;">
+            Enter Admin Portal <i data-lucide="arrow-right" style="width:14px;height:14px;"></i>
+          </div>
+        </div>
+
+        <!-- Teacher -->
+        <div class="glass-card role-card-item" onclick="openLoginModal('teacher')">
+          <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:16px;">
+            <div
+              style="width:48px;height:48px;border-radius:12px;background:rgba(139,92,246,0.15);border:1px solid var(--violet);display:flex;align-items:center;justify-content:center;color:var(--violet);">
+              <i data-lucide="graduation-cap"></i>
+            </div>
+            <span class="badge"
+              style="background:rgba(139,92,246,0.2); color:var(--violet); border:1px solid var(--violet);">TEACHER</span>
+          </div>
+          <h3 style="font-size:1.2rem; margin-bottom:8px;">Teacher Suite</h3>
+          <p style="font-size:0.85rem; color:var(--text-secondary); margin-bottom:16px;">Select class & subject, mark
+            attendance with 1 click, and fire instant automated notifications to parents.</p>
+          <div class="text-violet"
+            style="font-size:0.85rem; font-weight:600; display:flex; align-items:center; gap:6px;">
+            Enter Teacher Portal <i data-lucide="arrow-right" style="width:14px;height:14px;"></i>
+          </div>
+        </div>
+
+        <!-- Parent -->
+        <div class="glass-card role-card-item" onclick="openLoginModal('parent')">
+          <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:16px;">
+            <div
+              style="width:48px;height:48px;border-radius:12px;background:rgba(16,185,129,0.15);border:1px solid var(--emerald);display:flex;align-items:center;justify-content:center;color:var(--emerald);">
+              <i data-lucide="heart-handshake"></i>
+            </div>
+            <span class="badge badge-present">PARENT</span>
+          </div>
+          <h3 style="font-size:1.2rem; margin-bottom:8px;">Parent Watch</h3>
+          <p style="font-size:0.85rem; color:var(--text-secondary); margin-bottom:16px;">Monitor child presence in real
+            time, inspect the monthly color-coded calendar, and chat with professors.</p>
+          <div class="text-emerald"
+            style="font-size:0.85rem; font-weight:600; display:flex; align-items:center; gap:6px;">
+            Enter Parent Portal <i data-lucide="arrow-right" style="width:14px;height:14px;"></i>
+          </div>
+        </div>
+
+        <!-- Student -->
+        <div class="glass-card role-card-item" onclick="openLoginModal('student')">
+          <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:16px;">
+            <div
+              style="width:48px;height:48px;border-radius:12px;background:rgba(245,158,11,0.15);border:1px solid var(--amber);display:flex;align-items:center;justify-content:center;color:var(--amber);">
+              <i data-lucide="user-check"></i>
+            </div>
+            <span class="badge badge-late">STUDENT</span>
+          </div>
+          <h3 style="font-size:1.2rem; margin-bottom:8px;">Student Hub</h3>
+          <p style="font-size:0.85rem; color:var(--text-secondary); margin-bottom:16px;">Track subject percentages,
+            maintain daily streaks, review timetable, and protect eligibility.</p>
+          <div class="text-amber"
+            style="font-size:0.85rem; font-weight:600; display:flex; align-items:center; gap:6px;">
+            Enter Student Portal <i data-lucide="arrow-right" style="width:14px;height:14px;"></i>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Interactive Live Simulator Section -->
+    <section id="simulator" class="section-wrapper">
+      <div class="section-header">
+        <span class="badge badge-cyan" style="margin-bottom:12px;">HANDS-ON SIMULATION</span>
+        <h2>Experience the Real-Time Notification Pipeline</h2>
+        <p>Test the exact teacher-to-parent alert trigger right now without leaving this page.</p>
+      </div>
+
+      <div class="simulator-box">
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:32px; align-items:center;">
+          <div>
+            <div class="badge badge-cyan" style="margin-bottom:12px;">SIMULATED TEACHER CONSOLE</div>
+            <h3 style="font-size:1.5rem; margin-bottom:8px;">Mark Student Attendance</h3>
+            <p style="color:var(--text-secondary); font-size:0.9rem; margin-bottom:20px;">
+              Toggle Vaishnavi Chavan's status below and hit <strong>"Notify Parents"</strong>. Watch AttendX trigger the alert synthesizer and dispatch the parent notification to Rajaram Chavan in real-time.
+            </p>
+
+            <div
+              style="padding:16px; background:rgba(6,11,28,0.7); border-radius:var(--radius-md); border:1px solid var(--border-glass); margin-bottom:20px;">
+              <div style="display:flex; justify-content:space-between; align-items:center;">
+                <div style="display:flex; align-items:center; gap:12px;">
+                  <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80"
+                    style="width:40px;height:40px;border-radius:50%;object-fit:cover;border:1px solid var(--cyan);" />
+                  <div>
+                    <div style="font-weight:700;">Vaishnavi Chavan (CS-01)</div>
+                    <div style="font-size:0.75rem; color:var(--text-muted);">Computer Science (CS) • Core Lecture</div>
+                  </div>
+                </div>
+
+                <div style="display:flex; gap:6px;" id="simStatusBtns">
+                  <button type="button" class="btn-status active-present" id="simBtnPresent"
+                    onclick="simulateSelect('present')">Present</button>
+                  <button type="button" class="btn-status" id="simBtnAbsent"
+                    onclick="simulateSelect('absent')">Absent</button>
+                  <button type="button" class="btn-status" id="simBtnLate"
+                    onclick="simulateSelect('late')">Late</button>
+                </div>
+              </div>
+            </div>
+
+            <button class="btn btn-cyan" style="width:100%;" onclick="runLiveSimulator()">
+              <i data-lucide="send" style="width:16px;height:16px;"></i> Dispatch Instant Parent Notification
+            </button>
+          </div>
+
+          <div
+            style="padding:24px; background:rgba(13,22,53,0.9); border-radius:var(--radius-lg); border:1px solid var(--border-glass);">
+            <div class="badge badge-present" style="margin-bottom:12px;">PARENT'S MOBILE SIMULATION</div>
+            <div id="simParentScreen"
+              style="min-height:160px; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; padding:16px; border:1px dashed rgba(0,240,255,0.3); border-radius:var(--radius-md);">
+              <i data-lucide="smartphone" style="width:36px;height:36px;color:var(--cyan);margin-bottom:8px;"></i>
+              <div style="font-weight:600; color:#FFFFFF;">Parent Terminal Waiting</div>
+              <div style="font-size:0.8rem; color:var(--text-muted); margin-top:4px;">Click Dispatch to observe instant
+                transmission</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="section-wrapper">
+      <div class="section-header">
+        <span class="badge badge-cyan" style="margin-bottom:12px;">FREQUENTLY ASKED QUESTIONS</span>
+        <h2>Everything You Need to Know</h2>
+        <p>Common questions regarding AttendX smart-campus deployment and features.</p>
+      </div>
+
+      <div class="faq-grid">
+        <div class="glass-card faq-item active" onclick="this.classList.toggle('active')">
+          <div class="faq-question">
+            <span>How does AttendX dispatch notifications without SMS API costs?</span>
+            <i data-lucide="chevron-down" style="width:18px;height:18px;"></i>
+          </div>
+          <div class="faq-answer">
+            AttendX features a dual-dispatch system: in standalone deployment, it utilizes high-speed reactive browser
+            pub/sub with audio synthesis and local state synchronization. In enterprise setup, it easily hooks to
+            Twilio, Firebase Cloud Messaging (FCM), or WhatsApp Business APIs.
+          </div>
+        </div>
+
+        <div class="glass-card faq-item" onclick="this.classList.toggle('active')">
+          <div class="faq-question">
+            <span>What happens when a student's attendance falls below 75%?</span>
+            <i data-lucide="chevron-down" style="width:18px;height:18px;"></i>
+          </div>
+          <div class="faq-answer">
+            The platform automatically activates the Autonomous Risk Guard. The student's dashboard displays a pulsing
+            debarment warning along with a calculated recovery roadmap (e.g., "Attend 5 consecutive lectures to regain
+            eligibility"), while guardians receive a formal attendance alert.
+          </div>
+        </div>
+
+        <div class="glass-card faq-item" onclick="this.classList.toggle('active')">
+          <div class="faq-question">
+            <span>Can parents view past attendance from previous weeks?</span>
+            <i data-lucide="chevron-down" style="width:18px;height:18px;"></i>
+          </div>
+          <div class="faq-answer">
+            Yes! The Parent Portal features an interactive monthly calendar where every day is color-coded (Green for
+            Present, Red for Absent, Yellow for Late). Clicking any date reveals the exact timetable, lecture topics,
+            and professor notes for that day.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="landing-footer">
+      <div class="footer-top">
+        <div class="brand-logo">
+          <div class="brand-icon-box">
+            <i data-lucide="shield-check" style="color:var(--cyan); width:24px; height:24px;"></i>
+          </div>
+          <div>
+            <span class="brand-name">Attend<span style="color:var(--cyan);">X</span></span>
+            <span class="brand-tag">SMART CAMPUS</span>
+          </div>
+        </div>
+
+        <div style="display:flex; gap:24px;">
+          <a href="#" class="text-muted" onclick="openLoginModal('admin')">Admin</a>
+          <a href="#" class="text-muted" onclick="openLoginModal('teacher')">Teacher</a>
+          <a href="#" class="text-muted" onclick="openLoginModal('parent')">Parent</a>
+          <a href="#" class="text-muted" onclick="openLoginModal('student')">Student</a>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>© 2026 AttendX Smart Campus Technologies. Built with Futuristic 3D Glassmorphism.</div>
+        <div style="font-family:var(--font-mono); font-size:0.75rem; color:var(--cyan);">SYSTEM STATUS: ONLINE • ALL
+          NODES ACTIVE</div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- =========================================================================
+       2. APP SHELL (PORTAL SUITE)
+       ========================================================================= -->
+  <div id="app-shell">
+    <!-- Sidebar Navigation -->
+    <aside class="app-sidebar">
+      <div>
+        <div class="sidebar-header">
+          <a href="#" class="brand-logo" onclick="switchView('landing')">
+            <div class="brand-icon-box" style="width:36px;height:36px;">
+              <i data-lucide="shield-check" style="color:var(--cyan); width:20px; height:20px;"></i>
+            </div>
+            <div>
+              <span class="brand-name" style="font-size:1.25rem;">Attend<span style="color:var(--cyan);">X</span></span>
+            </div>
+          </a>
+        </div>
+
+        <nav class="sidebar-nav">
+          <a class="nav-link-item active" data-view="admin-dashboard">
+            <i data-lucide="layout-dashboard"></i>
+            <span>Admin Console</span>
+          </a>
+          <a class="nav-link-item" data-view="teacher-dashboard">
+            <i data-lucide="clipboard-check"></i>
+            <span>Teacher Suite</span>
+          </a>
+          <a class="nav-link-item" data-view="parent-dashboard">
+            <i data-lucide="heart"></i>
+            <span>Parent Portal</span>
+          </a>
+          <a class="nav-link-item" data-view="student-dashboard">
+            <i data-lucide="user"></i>
+            <span>Student Hub</span>
+          </a>
+          <a class="nav-link-item" data-view="students">
+            <i data-lucide="users"></i>
+            <span>Student Roster</span>
+          </a>
+          <a class="nav-link-item" data-view="teachers-dir">
+            <i data-lucide="graduation-cap"></i>
+            <span>Faculty Directory</span>
+          </a>
+          <a class="nav-link-item" data-view="notifications">
+            <i data-lucide="bell"></i>
+            <span>Alert Center</span>
+            <span class="nav-badge" id="sidebarNotifBadge">5</span>
+          </a>
+          <a class="nav-link-item" data-view="analytics">
+            <i data-lucide="trending-up"></i>
+            <span>Visual Analytics</span>
+          </a>
+          <a class="nav-link-item" data-view="reports">
+            <i data-lucide="file-text"></i>
+            <span>Audit Reports</span>
+          </a>
+        </nav>
+      </div>
+
+      <!-- User Session Footer -->
+      <div class="sidebar-footer">
+        <div class="user-mini-card" style="margin-bottom:12px;">
+          <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=200&q=80"
+            class="user-session-avatar user-avatar-img" />
+          <div class="user-mini-info">
+            <h4 class="user-session-name">Dr. Vidya Mohod Ma’am</h4>
+            <p class="user-session-title">Chief Campus Administrator</p>
+          </div>
+        </div>
+
+        <div style="display:flex; gap:8px;">
+          <button class="btn btn-sm btn-ghost" style="flex:1;" onclick="openRoleSwitchDropdown()">
+            <i data-lucide="refresh-cw" style="width:14px;height:14px;"></i> Switch Role
+          </button>
+          <button class="btn btn-sm btn-danger" onclick="handleLogout()" title="Logout">
+            <i data-lucide="log-out" style="width:14px;height:14px;"></i>
+          </button>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content Container -->
+    <main class="app-main">
+      <!-- Header -->
+      <header class="app-header">
+        <div class="header-left">
+          <button class="mobile-menu-btn" id="mobileMenuBtn">
+            <i data-lucide="menu"></i>
+          </button>
+
+          <div class="search-box-wrapper">
+            <i data-lucide="search" class="search-icon-pos" style="width:16px;height:16px;"></i>
+            <input type="text" id="globalSearchInput" class="search-input"
+              placeholder="Search student, roll number, or class..." />
+          </div>
+        </div>
+
+        <div class="header-right">
+          <!-- Firebase Cloud Status Badge -->
+          <button id="firebaseStatusPill" class="btn btn-sm btn-ghost" onclick="openFirebaseModal()" title="Firebase Cloud Database Status" style="display:inline-flex; align-items:center; gap:6px; font-size:0.78rem; border:1px solid rgba(0,240,255,0.25); border-radius:20px; padding:4px 10px; cursor:pointer;">
+            <span id="firebaseStatusDot" style="width:8px; height:8px; border-radius:50%; background:#10B981; display:inline-block; box-shadow:0 0 8px #10B981;"></span>
+            <span id="firebaseStatusText">Cloud Synced</span>
+          </button>
+
+          <div class="live-clock-badge" id="liveCampusClock">
+            Oct 02, 2026 • 10:45 PM • Campus Active
+          </div>
+
+          <button class="btn btn-sm btn-ghost" onclick="switchView('landing')">
+            <i data-lucide="globe" style="width:14px;height:14px;"></i> Public Home
+          </button>
+
+          <button class="header-icon-btn" onclick="toggleNotificationDrawer()" title="Notifications">
+            <i data-lucide="bell" style="width:18px;height:18px;"></i>
+            <span class="icon-badge-dot"></span>
+          </button>
+
+          <button class="btn btn-sm btn-cyan" onclick="openLoginModal()">
+            <span class="user-session-role">ADMIN</span>
+          </button>
+        </div>
+      </header>
+
+      <!-- Stage Views -->
+      <div class="view-stage">
+
+        <!-- ==========================================
+             VIEW: ADMIN DASHBOARD
+             ========================================== -->
+        <div id="view-admin-dashboard" class="app-view active-view">
+          <div class="view-header-row">
+            <div class="view-title-group">
+              <h2>Smart Campus Command Dashboard</h2>
+              <p>Real-time attendance telemetry, campus health metrics, and at-risk student monitoring.</p>
+            </div>
+            <div style="display:flex; gap:10px;">
+              <button class="btn btn-ghost" onclick="switchView('reports')">
+                <i data-lucide="download" style="width:16px;height:16px;"></i> Export Data
+              </button>
+              <button class="btn btn-cyan" onclick="openComposeNotificationModal()">
+                <i data-lucide="send" style="width:16px;height:16px;"></i> Broadcast Alert
+              </button>
+            </div>
+          </div>
+
+          <!-- 4 KPI Cards -->
+          <div class="stat-cards-grid">
+            <div class="glass-card kpi-card glow-border-top">
+              <div class="kpi-top">
+                <span class="kpi-title">Total Enrolled</span>
+                <div class="kpi-icon-pill"
+                  style="background:rgba(0,240,255,0.15); color:var(--cyan); border:1px solid var(--cyan);">
+                  <i data-lucide="users"></i>
+                </div>
+              </div>
+              <div class="kpi-metric-row">
+                <div class="kpi-number text-gradient" id="adminKpiTotal">1,250</div>
+                <div class="kpi-trend text-emerald">
+                  <i data-lucide="trending-up" style="width:14px;height:14px;"></i> +100%
+                </div>
+              </div>
+              <div style="font-size:0.75rem; color:var(--text-muted);">Across 45 university sections</div>
+            </div>
+
+            <div class="glass-card kpi-card glow-border-top">
+              <div class="kpi-top">
+                <span class="kpi-title">Present Today</span>
+                <div class="kpi-icon-pill"
+                  style="background:rgba(16,185,129,0.15); color:var(--emerald); border:1px solid var(--emerald);">
+                  <i data-lucide="user-check"></i>
+                </div>
+              </div>
+              <div class="kpi-metric-row">
+                <div class="kpi-number text-emerald" id="adminKpiPresent">1,156</div>
+                <div class="kpi-trend text-emerald">
+                  <i data-lucide="check-circle" style="width:14px;height:14px;"></i> Normal
+                </div>
+              </div>
+              <div style="font-size:0.75rem; color:var(--text-muted);">92.4% campus-wide attendance</div>
+            </div>
+
+            <div class="glass-card kpi-card glow-border-top">
+              <div class="kpi-top">
+                <span class="kpi-title">Absent Today</span>
+                <div class="kpi-icon-pill"
+                  style="background:rgba(239,68,68,0.15); color:var(--coral); border:1px solid var(--coral);">
+                  <i data-lucide="user-x"></i>
+                </div>
+              </div>
+              <div class="kpi-metric-row">
+                <div class="kpi-number text-coral" id="adminKpiAbsent">94</div>
+                <div class="kpi-trend text-coral">
+                  <i data-lucide="arrow-up-right" style="width:14px;height:14px;"></i> Alerts Out
+                </div>
+              </div>
+              <div style="font-size:0.75rem; color:var(--text-muted);">Guardians notified automatically</div>
+            </div>
+
+            <div class="glass-card kpi-card glow-border-top">
+              <div class="kpi-top">
+                <span class="kpi-title">Average Attendance</span>
+                <div class="kpi-icon-pill"
+                  style="background:rgba(139,92,246,0.15); color:var(--violet); border:1px solid var(--violet);">
+                  <i data-lucide="activity"></i>
+                </div>
+              </div>
+              <div class="kpi-metric-row">
+                <div class="kpi-number text-cyan" id="adminKpiAvg">92.4%</div>
+                <div class="kpi-trend text-emerald">
+                  <i data-lucide="arrow-up" style="width:14px;height:14px;"></i> +1.8%
+                </div>
+              </div>
+              <div style="font-size:0.75rem; color:var(--text-muted);">Above 85% campus threshold</div>
+            </div>
+          </div>
+
+          <!-- Charts Row -->
+          <div class="charts-grid-row">
+            <div class="glass-card chart-card-wrapper glow-border-top">
+              <div class="chart-card-header">
+                <div>
+                  <h3 style="font-size:1.15rem;">7-Day Campus Attendance Trend</h3>
+                  <p style="font-size:0.8rem; color:var(--text-muted);">Real-time presence logging over current week</p>
+                </div>
+                <span class="badge badge-cyan">LIVE TELEMETRY</span>
+              </div>
+              <div class="chart-canvas-box">
+                <canvas id="trendChart"></canvas>
+              </div>
+            </div>
+
+            <div class="glass-card chart-card-wrapper glow-border-top">
+              <div class="chart-card-header">
+                <div>
+                  <h3 style="font-size:1.15rem;">Today's Distribution</h3>
+                  <p style="font-size:0.8rem; color:var(--text-muted);">Present vs Absent vs Late breakdown</p>
+                </div>
+              </div>
+              <div class="chart-canvas-box">
+                <canvas id="statusDoughnutChart"></canvas>
+              </div>
+            </div>
+          </div>
+
+          <!-- Class-wise Bar & Low Attendance Grid -->
+          <div class="dashboard-columns-2">
+            <div class="glass-card" style="padding:24px;">
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:18px;">
+                <h3 style="font-size:1.15rem;">Class-Wise Attendance Ranking</h3>
+                <span class="badge badge-present">TOP PERFORMERS</span>
+              </div>
+              <div style="height:260px; position:relative;">
+                <canvas id="classBarChart"></canvas>
+              </div>
+            </div>
+
+            <!-- Low Attendance At-Risk Watchlist -->
+            <div class="glass-card" style="padding:24px;">
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+                <div>
+                  <h3 style="font-size:1.15rem;">At-Risk Students (&lt;75%)</h3>
+                  <p style="font-size:0.8rem; color:var(--text-muted);">Debarment prevention watchlist</p>
+                </div>
+                <span class="badge badge-warning">REQUIRES ACTION</span>
+              </div>
+              <div id="adminLowAttendanceList" style="display:flex; flex-direction:column; gap:10px;">
+                <!-- Populated via JS -->
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ==========================================
+             VIEW: ALL CAMPUS CLASSES (CS & IT)
+             ========================================== -->
+        <div id="view-campus-classes" class="app-view">
+          <div class="view-header-row">
+            <div class="view-title-group">
+              <h2>All Campus Classes</h2>
+              <p>Select a class below to inspect its enrolled students, department info, and attendance metrics.</p>
+            </div>
+            <div style="display:flex; gap:10px;">
+              <button class="btn btn-ghost" onclick="switchView('admin-dashboard')">
+                <i data-lucide="arrow-left" style="width:16px;height:16px;"></i> Admin Console
+              </button>
+              <button class="btn btn-cyan" onclick="switchView('teacher-dashboard')">
+                <i data-lucide="check-check" style="width:16px;height:16px;"></i> Mark Class Attendance
+              </button>
+            </div>
+          </div>
+
+          <!-- 2 Clickable Class 3D Cards: CS & IT -->
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px; margin-bottom:28px;">
+            <div class="campus-class-card active-class" id="classCard-CS" onclick="selectCampusClass('CS')">
+              <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:14px;">
+                <div
+                  style="width:48px;height:48px;border-radius:12px;background:rgba(0,240,255,0.15);border:1px solid var(--cyan);display:flex;align-items:center;justify-content:center;color:var(--cyan);">
+                  <i data-lucide="code-2" style="width:24px;height:24px;"></i>
+                </div>
+                <span class="badge badge-cyan">10 STUDENTS ENROLLED</span>
+              </div>
+              <h3 style="font-size:1.35rem; margin-bottom:4px;">CS — Computer Science</h3>
+              <p style="font-size:0.85rem; color:var(--text-secondary); margin-bottom:14px;">Core Department: Computer
+                Science • Semester 6</p>
+              <div
+                style="display:flex; align-items:center; justify-content:space-between; padding-top:12px; border-top:1px solid var(--border-glass-subtle); font-size:0.8rem;">
+                <span style="color:var(--text-muted);">Faculty: Swapnali J., Anuja K., Trupti T.</span>
+                <span class="text-cyan" style="font-weight:700;">Click to view roster &rarr;</span>
+              </div>
+            </div>
+
+            <div class="campus-class-card" id="classCard-IT" onclick="selectCampusClass('IT')">
+              <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:14px;">
+                <div
+                  style="width:48px;height:48px;border-radius:12px;background:rgba(139,92,246,0.15);border:1px solid var(--violet);display:flex;align-items:center;justify-content:center;color:var(--violet);">
+                  <i data-lucide="network" style="width:24px;height:24px;"></i>
+                </div>
+                <span class="badge"
+                  style="background:rgba(139,92,246,0.2); color:var(--violet); border:1px solid var(--violet);">5
+                  STUDENTS ENROLLED</span>
+              </div>
+              <h3 style="font-size:1.35rem; margin-bottom:4px;">IT — Information Technology</h3>
+              <p style="font-size:0.85rem; color:var(--text-secondary); margin-bottom:14px;">Core Department:
+                Information Technology • Semester 6</p>
+              <div
+                style="display:flex; align-items:center; justify-content:space-between; padding-top:12px; border-top:1px solid var(--border-glass-subtle); font-size:0.8rem;">
+                <span style="color:var(--text-muted);">Faculty: Srushti P., Sneha M., Chaitrali N.</span>
+                <span class="text-violet" style="font-weight:700;">Click to view roster &rarr;</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Class Students List Container -->
+          <div class="glass-card" style="padding:24px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:18px;">
+              <div>
+                <h3 id="campusClassRosterTitle" style="font-size:1.2rem;">Computer Science (CS) Student Roster</h3>
+                <p id="campusClassRosterSub" style="font-size:0.82rem; color:var(--text-muted);">10 Enrolled Students
+                </p>
+              </div>
+              <button class="btn btn-sm btn-ghost" onclick="printOfficialReport()">
+                <i data-lucide="printer" style="width:14px;height:14px;"></i> Print Roster
+              </button>
+            </div>
+
+            <div class="table-responsive">
+              <table class="cyber-table">
+                <thead>
+                  <tr>
+                    <th style="width:50px;">#</th>
+                    <th>Student Name</th>
+                    <th>Roll No</th>
+                    <th>Department</th>
+                    <th>Overall Attendance</th>
+                    <th>Parent / Guardian</th>
+                    <th>Academic Health</th>
+                  </tr>
+                </thead>
+                <tbody id="campusClassRosterBody">
+                  <!-- Populated via JS -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- ==========================================
+             VIEW: TEACHERS DIRECTORY (ADMIN -> TEACHERS)
+             ========================================== -->
+        <div id="view-teachers-dir" class="app-view">
+          <div class="view-header-row">
+            <div class="view-title-group">
+              <h2>Faculty &amp; Teacher Directory</h2>
+              <p>Faculty management, class assignments, and department leadership overseen by Dr. Vidya Mohod Ma’am.</p>
+            </div>
+            <div style="display:flex; gap:10px;">
+              <button class="btn btn-ghost" onclick="switchView('teacher-dashboard')">
+                <i data-lucide="clipboard-check" style="width:16px;height:16px;"></i> Launch Attendance Suite
+              </button>
+              <button class="btn btn-cyan" onclick="openAddTeacherModal()">
+                <i data-lucide="user-plus" style="width:16px;height:16px;"></i> Add New Faculty
+              </button>
+            </div>
+          </div>
+
+          <div class="glass-card" style="padding:0; overflow:hidden;">
+            <div class="table-responsive">
+              <table class="cyber-table">
+                <thead>
+                  <tr>
+                    <th>Teacher Name</th>
+                    <th>Email</th>
+                    <th>Department</th>
+                    <th>Assigned Class</th>
+                    <th>Subject Specialty</th>
+                    <th>Academic Role</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="teachersTableBody">
+                  <!-- Populated via JS -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- ==========================================
+             VIEW: TEACHER DASHBOARD
+             ========================================== -->
+        <div id="view-teacher-dashboard" class="app-view">
+          <div class="view-header-row">
+            <div class="view-title-group">
+              <h2>Teacher Attendance Suite</h2>
+              <p>Select class and subject, log attendance with rapid controls, and dispatch automated parent alerts.</p>
+            </div>
+            <div style="display:flex; gap:10px;">
+              <button class="btn btn-ghost" onclick="teacherMarkAllPresent()">
+                <i data-lucide="check-check" style="width:16px;height:16px;"></i> Mark All Present
+              </button>
+              <button class="btn btn-primary" onclick="teacherSaveAttendance()">
+                <i data-lucide="save" style="width:16px;height:16px;"></i> Save Attendance
+              </button>
+              <button class="btn btn-cyan" onclick="teacherNotifyParents()">
+                <i data-lucide="bell" style="width:16px;height:16px;"></i> Notify Parents
+              </button>
+            </div>
+          </div>
+
+          <!-- Filter & Session Selector Bar -->
+          <div class="glass-card teacher-filter-bar glow-border-top"
+            style="grid-template-columns: 1fr 1fr 1.2fr 1fr auto;">
+            <div class="form-group" style="margin-bottom:0;">
+              <label class="form-label">SELECT FACULTY / INSTRUCTOR</label>
+              <select id="teacherActiveSelect" class="form-control">
+                <!-- Populated via JS with 6 teachers -->
+              </select>
+            </div>
+
+            <div class="form-group" style="margin-bottom:0;">
+              <label class="form-label">SELECT CLASS SECTION</label>
+              <select id="teacherClassSelect" class="form-control">
+                <!-- Populated via JS (CS or IT) -->
+              </select>
+            </div>
+
+            <div class="form-group" style="margin-bottom:0;">
+              <label class="form-label">SELECT SUBJECT / MODULE</label>
+              <select id="teacherSubjectSelect" class="form-control">
+                <!-- Populated via JS -->
+              </select>
+            </div>
+
+            <div class="form-group" style="margin-bottom:0;">
+              <label class="form-label">SESSION DATE</label>
+              <input type="date" id="teacherDateInput" class="form-control" value="2026-10-02" />
+            </div>
+
+            <div>
+              <button class="btn btn-ghost" style="height:44px;" onclick="initTeacherDashboard()">
+                <i data-lucide="refresh-cw" style="width:16px;height:16px;"></i> Refresh
+              </button>
+            </div>
+          </div>
+
+          <!-- Roster Live Tally Bar -->
+          <div class="roster-summary-bar">
+            <div style="display:flex; align-items:center; gap:24px;">
+              <div>
+                <span style="font-size:0.75rem; color:var(--text-muted); text-transform:uppercase;">Enrolled:</span>
+                <span id="tallyTotal" style="font-weight:700; color:#FFFFFF; margin-left:6px;">10</span>
+              </div>
+              <div>
+                <span style="font-size:0.75rem; color:var(--text-muted); text-transform:uppercase;">Present:</span>
+                <span id="tallyPresent" style="font-weight:700; color:var(--emerald); margin-left:6px;">9</span>
+              </div>
+              <div>
+                <span style="font-size:0.75rem; color:var(--text-muted); text-transform:uppercase;">Absent:</span>
+                <span id="tallyAbsent" style="font-weight:700; color:var(--coral); margin-left:6px;">1</span>
+              </div>
+              <div>
+                <span style="font-size:0.75rem; color:var(--text-muted); text-transform:uppercase;">Late:</span>
+                <span id="tallyLate" style="font-weight:700; color:var(--amber); margin-left:6px;">0</span>
+              </div>
+            </div>
+
+            <div style="font-size:0.8rem; color:var(--text-muted);">
+              Marked By Instructor: <strong style="color:var(--cyan);" id="teacherInstructorName">Swapnali
+                Jadhav</strong>
+            </div>
+          </div>
+
+          <!-- Student Roster Table -->
+          <div class="glass-card" style="padding:0; overflow:hidden; margin-bottom:28px;">
+            <div class="table-responsive">
+              <table class="cyber-table">
+                <thead>
+                  <tr>
+                    <th style="width:50px;">#</th>
+                    <th>Student Details</th>
+                    <th>Current Overall %</th>
+                    <th>Attendance Marking</th>
+                    <th>Status Badge</th>
+                  </tr>
+                </thead>
+                <tbody id="teacherRosterContainer">
+                  <!-- Populated via JS -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Archived Attendance History -->
+          <div class="glass-card" style="padding:24px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+              <h3 style="font-size:1.15rem;">Archived Session Logs</h3>
+              <span class="badge badge-cyan">SAVED IN LOCALSTORAGE</span>
+            </div>
+            <div id="teacherAttendanceHistoryList">
+              <!-- Populated via JS -->
+            </div>
+          </div>
+        </div>
+
+        <!-- ==========================================
+             VIEW: PARENT DASHBOARD
+             ========================================== -->
+        <div id="view-parent-dashboard" class="app-view">
+          <div class="view-header-row">
+            <div class="view-title-group">
+              <h2>Parent Guardian Portal</h2>
+              <p>Proactive real-time attendance tracking, monthly calendar review, and direct teacher inquiry.</p>
+            </div>
+            <div style="display:flex; gap:10px;">
+              <button class="btn btn-ghost" onclick="printOfficialReport()">
+                <i data-lucide="printer" style="width:16px;height:16px;"></i> Print Monthly Report
+              </button>
+              <button class="btn btn-cyan" onclick="exportReportCSV()">
+                <i data-lucide="download" style="width:16px;height:16px;"></i> Download Transcript
+              </button>
+            </div>
+          </div>
+
+          <!-- Hero Grid: Child Profile & Big Attendance Ring -->
+          <div class="parent-hero-grid">
+            <div class="glass-card child-profile-card glow-border-top">
+              <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80" id="parentChildAvatar" class="child-avatar-big" />
+              <div style="flex-grow:1;">
+                <span class="badge badge-present" style="margin-bottom:8px;">ACTIVE STUDENT ENROLLED</span>
+                <h2 id="parentChildName" style="font-size:1.6rem; margin-bottom:4px;">Vaishnavi Chavan</h2>
+                <p id="parentChildRoll" style="font-family:var(--font-mono); color:var(--cyan); font-size:0.9rem;">Roll
+                  No: CS-01</p>
+                <p id="parentChildClass" style="color:var(--text-secondary); font-size:0.85rem; margin-top:2px;">
+                  Class: CS (Computer Science)</p>
+
+                <div style="display:flex; align-items:center; gap:8px; margin-top:14px;">
+                  <span class="badge badge-present">🟢 PRESENT TODAY</span>
+                  <span style="font-size:0.8rem; color:var(--text-muted);">Last verified at 09:30 AM</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Big Circular Holographic Meter -->
+            <div class="glass-card glow-border-top"
+              style="padding:28px; display:flex; align-items:center; justify-content:space-around;">
+              <div class="radial-meter-box">
+                <svg class="radial-meter-svg" viewBox="0 0 160 160">
+                  <circle class="radial-meter-bg" cx="80" cy="80" r="70"></circle>
+                  <circle id="parentRadialCircle" class="radial-meter-progress" cx="80" cy="80" r="70"></circle>
+                </svg>
+                <div class="radial-meter-text">
+                  <h3 id="parentRadialPct" class="text-cyan">92.4%</h3>
+                  <p>Attendance</p>
+                </div>
+              </div>
+
+              <div style="display:flex; flex-direction:column; gap:12px;">
+                <div>
+                  <div style="font-size:0.75rem; color:var(--text-muted);">MINIMUM REQUIREMENT</div>
+                  <div style="font-size:1.1rem; font-weight:700; color:#FFFFFF;">75.0% Mandatory</div>
+                </div>
+                <div>
+                  <div style="font-size:0.75rem; color:var(--text-muted);">CAMPUS RANKING</div>
+                  <div style="font-size:1.1rem; font-weight:700; color:var(--emerald);">Top 10% in Class</div>
+                </div>
+                <div>
+                  <div style="font-size:0.75rem; color:var(--text-muted);">CURRENT STATUS</div>
+                  <div class="text-emerald" style="font-weight:700; font-size:0.9rem;">Excellent Standing</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Monthly Calendar & Absence Alerts Split -->
+          <div class="dashboard-columns-2" style="margin-bottom:28px;">
+            <!-- Interactive Monthly Attendance Calendar -->
+            <div class="glass-card attendance-calendar">
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:18px;">
+                <div>
+                  <h3 style="font-size:1.15rem;">October 2026 Attendance Calendar</h3>
+                  <p style="font-size:0.8rem; color:var(--text-muted);">Click any date to inspect session breakdown</p>
+                </div>
+                <div style="display:flex; align-items:center; gap:8px; font-size:0.75rem;">
+                  <span style="color:var(--emerald);">● Present</span>
+                  <span style="color:var(--coral);">● Absent</span>
+                  <span style="color:var(--amber);">● Late</span>
+                </div>
+              </div>
+
+              <div class="calendar-days-header">
+                <div>SUN</div>
+                <div>MON</div>
+                <div>TUE</div>
+                <div>WED</div>
+                <div>THU</div>
+                <div>FRI</div>
+                <div>SAT</div>
+              </div>
+
+              <div id="parentCalendarGrid" class="calendar-grid-month">
+                <!-- Populated via JS -->
+              </div>
+            </div>
+
+            <!-- Direct Parent-Teacher Chat & Absence Alerts -->
+            <div style="display:flex; flex-direction:column; gap:24px;">
+              <!-- Absence Alerts Box -->
+              <div class="glass-card" style="padding:24px;">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+                  <h3 style="font-size:1.15rem;">Real-Time Absence Alerts</h3>
+                  <span class="badge badge-warning">ALERTS</span>
+                </div>
+                <div id="parentAlertsList"
+                  style="display:flex; flex-direction:column; gap:12px; max-height:220px; overflow-y:auto;">
+                  <!-- Populated via JS -->
+                </div>
+              </div>
+
+              <!-- Direct Chat Box -->
+              <div class="glass-card" style="padding:24px; display:flex; flex-direction:column; height:320px;">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
+                  <div>
+                    <h3 style="font-size:1.05rem;">Direct Teacher Inquiries</h3>
+                    <p style="font-size:0.75rem; color:var(--text-muted);">Chat with Prof. Elena Rostova</p>
+                  </div>
+                  <span class="badge badge-cyan">ONLINE</span>
+                </div>
+
+                <div id="parentChatContainer"
+                  style="flex-grow:1; overflow-y:auto; padding-right:6px; margin-bottom:12px;">
+                  <!-- Populated via JS -->
+                </div>
+
+                <div style="display:flex; gap:8px;">
+                  <input type="text" id="parentChatInput" class="form-control"
+                    placeholder="Inquire about attendance, leave, or exams..."
+                    onkeydown="if(event.key==='Enter') sendParentMessage()" />
+                  <button class="btn btn-cyan" onclick="sendParentMessage()">
+                    <i data-lucide="send" style="width:16px;height:16px;"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ==========================================
+             VIEW: STUDENT DASHBOARD
+             ========================================== -->
+        <div id="view-student-dashboard" class="app-view">
+          <div class="view-header-row">
+            <div class="view-title-group">
+              <h2>Good Morning, <span id="studentGreetingName" class="text-gradient">Vaishnavi Chavan</span>!</h2>
+              <p>Keep your presence high, unlock campus streak milestones, and stay ahead of exams.</p>
+            </div>
+            <div style="display:flex; align-items:center; gap:12px;">
+              <div class="streak-card-glow"
+                style="padding:10px 18px; border-radius:var(--radius-full); display:flex; align-items:center; gap:8px;">
+                <span id="studentStreakValue" style="font-weight:800; font-size:1.05rem; color:var(--amber);">🔥 12 Days
+                  Streak</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Dynamic Warning Banner if < 75% -->
+          <div id="studentWarningBanner" class="glass-card"
+            style="display:none; padding:16px 20px; border-color:var(--coral); background:rgba(239,68,68,0.12); margin-bottom:24px; align-items:center; gap:16px;">
+            <div style="font-size:1.8rem; color:var(--coral);">
+              <i data-lucide="alert-octagon"></i>
+            </div>
+            <div style="flex-grow:1;">
+              <h4 style="color:#FFFFFF; font-size:1rem;">Critical Attendance Warning (&lt; 75%)</h4>
+              <p style="font-size:0.85rem; color:#FCA5A5;">Your attendance is below the mandatory 75% examination
+                threshold. Attend the next 5 sessions to regain eligibility.</p>
+            </div>
+            <button class="btn btn-sm btn-danger" onclick="switchView('parent-dashboard')">
+              <i data-lucide="phone" style="width:14px;height:14px;"></i> Alert Counselor
+            </button>
+          </div>
+
+          <!-- 4 KPI Cards -->
+          <div class="stat-cards-grid">
+            <div class="glass-card kpi-card glow-border-top">
+              <span class="kpi-title">Today's Presence</span>
+              <div class="kpi-metric-row">
+                <div class="kpi-number text-emerald">Present</div>
+              </div>
+              <div style="font-size:0.75rem; color:var(--text-muted);">4 of 4 lectures completed today</div>
+            </div>
+
+            <div class="glass-card kpi-card glow-border-top">
+              <span class="kpi-title">Overall Percentage</span>
+              <div class="kpi-metric-row">
+                <div class="kpi-number text-cyan" id="studentOverallPct">92.4%</div>
+              </div>
+              <div style="font-size:0.75rem; color:var(--text-muted);">Safe from debarment criteria</div>
+            </div>
+
+            <div class="glass-card kpi-card glow-border-top">
+              <span class="kpi-title">Classes Attended</span>
+              <div class="kpi-metric-row">
+                <div class="kpi-number text-gradient" id="studentAttendedLectures">146</div>
+              </div>
+              <div style="font-size:0.75rem; color:var(--text-muted);">Total lectures joined this semester</div>
+            </div>
+
+            <div class="glass-card kpi-card glow-border-top">
+              <span class="kpi-title">Classes Missed</span>
+              <div class="kpi-metric-row">
+                <div class="kpi-number text-coral" id="studentMissedLectures">13</div>
+              </div>
+              <div style="font-size:0.75rem; color:var(--text-muted);">Authorized & unexcused leaves</div>
+            </div>
+          </div>
+
+          <!-- Subject-Wise Attendance Breakdown -->
+          <div class="glass-card" style="padding:28px; margin-bottom:28px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
+              <div>
+                <h3 style="font-size:1.2rem;">Subject-Wise Performance & Eligibility</h3>
+                <p style="font-size:0.82rem; color:var(--text-muted);">Threshold indicator: 75% required for examination
+                  entry</p>
+              </div>
+              <span class="badge badge-cyan">SEMESTER 6</span>
+            </div>
+
+            <div id="studentSubjectList" style="display:flex; flex-direction:column; gap:14px;">
+              <!-- Populated via JS -->
+            </div>
+          </div>
+        </div>
+
+        <!-- ==========================================
+             VIEW: STUDENTS DIRECTORY (ADMIN)
+             ========================================== -->
+        <div id="view-students" class="app-view">
+          <div class="view-header-row">
+            <div class="view-title-group">
+              <h2>Smart Campus Student Roster</h2>
+              <p>Search, filter, enroll new students, inspect parent contact info, and monitor attendance health.</p>
+            </div>
+            <button class="btn btn-cyan" onclick="openAddStudentModal()">
+              <i data-lucide="user-plus" style="width:16px;height:16px;"></i> Enroll New Student
+            </button>
+          </div>
+
+          <!-- Filter & Search Toolbar -->
+          <div class="glass-card"
+            style="padding:16px 20px; display:flex; justify-content:space-between; align-items:center; gap:16px; margin-bottom:20px; flex-wrap:wrap;">
+            <div style="display:flex; align-items:center; gap:12px; flex:1; min-width:280px;">
+              <i data-lucide="search" style="color:var(--text-muted); width:18px; height:18px;"></i>
+              <input type="text" id="studentSearchInput" class="form-control"
+                placeholder="Search by student name, roll number, or email..."
+                style="background:transparent; border:none; padding:8px 0;" />
+            </div>
+
+            <div style="display:flex; align-items:center; gap:12px;">
+              <span style="font-size:0.85rem; color:var(--text-secondary);">Class Filter:</span>
+              <select id="studentClassFilter" class="form-control" style="width:160px; padding:6px 12px;">
+                <option value="ALL">All Classes</option>
+                <option value="CS">CS (Computer Science)</option>
+                <option value="IT">IT (Information Technology)</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Students Table -->
+          <div class="glass-card" style="padding:0; overflow:hidden;">
+            <div class="table-responsive">
+              <table class="cyber-table">
+                <thead>
+                  <tr>
+                    <th>Student ID</th>
+                    <th>Student Name</th>
+                    <th>Class</th>
+                    <th>Roll No</th>
+                    <th>Overall %</th>
+                    <th>Academic Health</th>
+                    <th class="actions-col-th">Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="studentsTableBody">
+                  <!-- Populated via JS -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- ==========================================
+             VIEW: NOTIFICATION CENTER
+             ========================================== -->
+        <div id="view-notifications" class="app-view">
+          <div class="view-header-row">
+            <div class="view-title-group">
+              <h2>Smart Alert & Notification Center</h2>
+              <p>Monitor high-priority parent alerts, automated attendance warnings, and campus broadcasts.</p>
+            </div>
+            <button class="btn btn-cyan" onclick="openComposeNotificationModal()">
+              <i data-lucide="send" style="width:16px;height:16px;"></i> Compose Broadcast
+            </button>
+          </div>
+
+          <div id="notificationsListFull">
+            <!-- Populated via JS -->
+          </div>
+        </div>
+
+        <!-- ==========================================
+             VIEW: VISUAL ANALYTICS
+             ========================================== -->
+        <div id="view-analytics" class="app-view">
+          <div class="view-header-row">
+            <div class="view-title-group">
+              <h2>Advanced Attendance Analytics</h2>
+              <p>Departmental comparative matrices, multi-week progression, and cross-subject radar telemetry.</p>
+            </div>
+          </div>
+
+          <div class="dashboard-columns-2" style="margin-bottom:28px;">
+            <div class="glass-card chart-card-wrapper glow-border-top">
+              <div class="chart-card-header">
+                <div>
+                  <h3 style="font-size:1.15rem;">Multi-Week Department Trajectory</h3>
+                  <p style="font-size:0.8rem; color:var(--text-muted);">CS vs AI departmental progression</p>
+                </div>
+              </div>
+              <div class="chart-canvas-box">
+                <canvas id="analyticsDailyChart"></canvas>
+              </div>
+            </div>
+
+            <div class="glass-card chart-card-wrapper glow-border-top">
+              <div class="chart-card-header">
+                <div>
+                  <h3 style="font-size:1.15rem;">Subject Presence Radar</h3>
+                  <p style="font-size:0.8rem; color:var(--text-muted);">Equilibrium analysis across major curriculum
+                    modules</p>
+                </div>
+              </div>
+              <div class="chart-canvas-box">
+                <canvas id="analyticsSubjectChart"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ==========================================
+             VIEW: AUDIT REPORTS
+             ========================================== -->
+        <div id="view-reports" class="app-view">
+          <div class="view-header-row">
+            <div class="view-title-group">
+              <h2>Official Campus Attendance Reports</h2>
+              <p>Generate certified transcripts, print official statements, and export analytical CSV logs.</p>
+            </div>
+            <div style="display:flex; gap:10px;">
+              <button class="btn btn-ghost" onclick="printOfficialReport()">
+                <i data-lucide="printer" style="width:16px;height:16px;"></i> Print Report
+              </button>
+              <button class="btn btn-cyan" onclick="exportReportCSV()">
+                <i data-lucide="download" style="width:16px;height:16px;"></i> Download CSV
+              </button>
+            </div>
+          </div>
+
+          <!-- Report Filters -->
+          <div class="glass-card teacher-filter-bar glow-border-top">
+            <div class="form-group" style="margin-bottom:0;">
+              <label class="form-label">CLASS FILTER</label>
+              <select id="reportClassSelect" class="form-control" onchange="generateFilteredReport()">
+                <option value="ALL">All Campus Classes</option>
+                <option value="CS">CS (Computer Science)</option>
+                <option value="IT">IT (Information Technology)</option>
+              </select>
+            </div>
+
+            <div class="form-group" style="margin-bottom:0;">
+              <label class="form-label">STATUS FILTER</label>
+              <select id="reportStatusSelect" class="form-control" onchange="generateFilteredReport()">
+                <option value="ALL">All Attendance Statuses</option>
+                <option value="regular">Regular Standing (&ge;75%)</option>
+                <option value="warning">At-Risk Debarment (&lt;75%)</option>
+              </select>
+            </div>
+
+            <div>
+              <button class="btn btn-primary" style="height:44px;" onclick="generateFilteredReport()">
+                <i data-lucide="filter" style="width:16px;height:16px;"></i> Apply Filters
+              </button>
+            </div>
+          </div>
+
+          <!-- Reports Table -->
+          <div class="glass-card" style="padding:0; overflow:hidden;">
+            <div class="table-responsive">
+              <table class="cyber-table">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Student Name</th>
+                    <th>Roll Number</th>
+                    <th>Class</th>
+                    <th>Attendance %</th>
+                    <th>Guardian & Contact</th>
+                    <th>Eligibility Status</th>
+                  </tr>
+                </thead>
+                <tbody id="reportTableBody">
+                  <!-- Populated via JS -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <!-- =========================================================================
+       MODALS & SLIDE-OUT DRAWERS
+       ========================================================================= -->
+
+  <!-- 1. Role Selection & Authentication Modal -->
+  <div id="loginModal" class="modal-overlay">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <div style="display:flex; align-items:center; gap:10px;">
+          <div class="brand-icon-box" style="width:32px;height:32px;">
+            <i data-lucide="shield-check" style="color:var(--cyan); width:18px; height:18px;"></i>
+          </div>
+          <h3 style="font-size:1.25rem;">Smart Campus Gateway</h3>
+        </div>
+        <button onclick="closeLoginModal()"
+          style="background:none; border:none; color:var(--text-muted); cursor:pointer;">
+          <i data-lucide="x"></i>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <label class="form-label" style="margin-bottom:10px;">1. SELECT OPERATIONAL ROLE</label>
+        <div class="role-showcase-grid" style="grid-template-columns:repeat(4,1fr); gap:10px; margin-bottom:24px;">
+          <div class="glass-card role-card-item selected" data-role="admin"
+            style="padding:14px 10px; text-align:center;">
+            <i data-lucide="crown" style="color:var(--cyan); margin-bottom:4px;"></i>
+            <div style="font-size:0.8rem; font-weight:700;">Admin</div>
+          </div>
+          <div class="glass-card role-card-item" data-role="teacher" style="padding:14px 10px; text-align:center;">
+            <i data-lucide="graduation-cap" style="color:var(--violet); margin-bottom:4px;"></i>
+            <div style="font-size:0.8rem; font-weight:700;">Teacher</div>
+          </div>
+          <div class="glass-card role-card-item" data-role="parent" style="padding:14px 10px; text-align:center;">
+            <i data-lucide="heart" style="color:var(--emerald); margin-bottom:4px;"></i>
+            <div style="font-size:0.8rem; font-weight:700;">Parent</div>
+          </div>
+          <div class="glass-card role-card-item" data-role="student" style="padding:14px 10px; text-align:center;">
+            <i data-lucide="user" style="color:var(--amber); margin-bottom:4px;"></i>
+            <div style="font-size:0.8rem; font-weight:700;">Student</div>
+          </div>
+        </div>
+
+        <form id="loginForm" autocomplete="off" novalidate>
+          <!-- Decoy fields to trap browser credential autofill heuristics -->
+          <input type="text" name="prevent_autofill_user" style="position:absolute; top:-9999px; left:-9999px; opacity:0; pointer-events:none; width:0; height:0;" tabindex="-1" autocomplete="off" />
+          <input type="password" name="prevent_autofill_pwd" style="position:absolute; top:-9999px; left:-9999px; opacity:0; pointer-events:none; width:0; height:0;" tabindex="-1" autocomplete="new-password" />
+
+          <!-- Quick Account Switcher (Select Any Student, Teacher, Parent or Admin) -->
+          <div class="form-group" id="loginAccountSelectGroup">
+            <label class="form-label" id="loginAccountSelectLabel">2. CHOOSE PROFILE / ACCOUNT</label>
+            <select id="loginAccountSelect" class="form-control" style="background:rgba(6,11,28,0.85); border:1px solid var(--border-glass-subtle);">
+              <!-- Dynamically populated via JS -->
+            </select>
+          </div>
+
+          <div id="loginErrorMessage" style="display:none; padding:10px 14px; margin-bottom:14px; border-radius:var(--radius-sm); background:rgba(239,68,68,0.15); border:1px solid rgba(239,68,68,0.35); color:#fca5a5; font-size:0.85rem; align-items:center; gap:8px;">
+            <i data-lucide="alert-circle" style="width:16px;height:16px; flex-shrink:0;"></i>
+            <span id="loginErrorText"></span>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">EMAIL / USERNAME</label>
+            <input type="text" id="loginEmail" name="campus_auth_identity" class="form-control" placeholder="Enter your registered email or username" autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false" readonly onfocus="this.removeAttribute('readonly');" />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">PASSWORD</label>
+            <div style="position:relative; display:flex; align-items:center;">
+              <input type="password" id="loginPassword" name="campus_auth_secret" class="form-control" placeholder="Enter your password" autocomplete="new-password" autocorrect="off" autocapitalize="none" spellcheck="false" readonly onfocus="this.removeAttribute('readonly');" style="padding-right:44px;" />
+              <button type="button" id="btnTogglePassword" style="position:absolute; right:10px; background:none; border:none; color:var(--text-muted); cursor:pointer; padding:6px; display:flex; align-items:center; justify-content:center;" title="Show or hide password">
+                <i data-lucide="eye" id="togglePasswordIcon" style="width:18px;height:18px;"></i>
+              </button>
+            </div>
+          </div>
+
+          <div
+            style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px; font-size:0.85rem;">
+            <label style="display:flex; align-items:center; gap:8px; cursor:pointer; color:var(--text-secondary);">
+              <input type="checkbox" id="showPasswordCheckbox" /> Show password
+            </label>
+            <label style="display:flex; align-items:center; gap:8px; cursor:pointer; color:var(--text-secondary);">
+              <input type="checkbox" id="rememberSessionCheckbox" checked /> Remember session
+            </label>
+          </div>
+
+          <div style="display:flex; flex-direction:column; gap:10px;">
+            <button type="submit" class="btn btn-cyan" style="width:100%; height:46px;">
+              <i data-lucide="key" style="width:16px;height:16px;"></i> Authenticate & Enter Portal
+            </button>
+            <button type="button" id="btnQuickDemoLogin" class="btn btn-ghost" style="width:100%;">
+              <i data-lucide="zap" style="width:16px;height:16px;"></i> 1-Click Quick Demo Login (<span
+                id="loginRoleBadge">ADMIN</span>)
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. Notification Drawer -->
+  <aside id="notificationDrawer" class="notification-drawer">
+    <div class="drawer-header">
+      <div style="display:flex; align-items:center; gap:10px;">
+        <i data-lucide="bell" style="color:var(--cyan); width:20px; height:20px;"></i>
+        <h3 style="font-size:1.15rem;">Campus Alert Feed</h3>
+      </div>
+      <button onclick="toggleNotificationDrawer()"
+        style="background:none; border:none; color:var(--text-muted); cursor:pointer;">
+        <i data-lucide="x"></i>
+      </button>
+    </div>
+
+    <div id="drawerNotifContainer" class="drawer-content">
+      <!-- Populated via JS -->
+    </div>
+
+    <div style="padding:16px 20px; border-top:1px solid var(--border-glass-subtle); display:flex; gap:10px;">
+      <button class="btn btn-sm btn-ghost" style="flex:1;"
+        onclick="window.attendxStore.markAllNotificationsRead(); showToast('Updated','All notifications marked read.','info'); toggleNotificationDrawer();">
+        Mark All Read
+      </button>
+      <button class="btn btn-sm btn-cyan" style="flex:1;"
+        onclick="switchView('notifications'); toggleNotificationDrawer();">
+        Full Center
+      </button>
+    </div>
+  </aside>
+
+  <!-- 3. Add/Edit Student Modal -->
+  <div id="studentFormModal" class="modal-overlay">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3 id="studentModalTitle" style="font-size:1.25rem;">Register New Student</h3>
+        <button onclick="closeStudentModal()"
+          style="background:none; border:none; color:var(--text-muted); cursor:pointer;">
+          <i data-lucide="x"></i>
+        </button>
+      </div>
+
+      <form id="studentForm">
+        <div class="modal-body">
+          <input type="hidden" id="studentFormId" />
+
+          <div class="form-group">
+            <label class="form-label">STUDENT FULL NAME</label>
+            <input type="text" id="studentFormName" class="form-control" placeholder="e.g. Aarav Sharma" required />
+          </div>
+
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px;">
+            <div class="form-group">
+              <label class="form-label">ROLL NUMBER</label>
+              <input type="text" id="studentFormRoll" class="form-control" placeholder="e.g. CS-045" required />
+            </div>
+            <div class="form-group">
+              <label class="form-label">CLASS SECTION</label>
+              <select id="studentFormClass" class="form-control">
+                <option value="CS">CS (Computer Science)</option>
+                <option value="IT">IT (Information Technology)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">STUDENT CAMPUS EMAIL</label>
+            <input type="email" id="studentFormEmail" class="form-control" placeholder="student@attendx.edu" required />
+          </div>
+
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px;">
+            <div class="form-group">
+              <label class="form-label">PARENT / GUARDIAN NAME</label>
+              <input type="text" id="studentFormParentName" class="form-control" placeholder="Parent Name" />
+            </div>
+            <div class="form-group">
+              <label class="form-label">PARENT PHONE CONTACT</label>
+              <input type="text" id="studentFormParentPhone" class="form-control" placeholder="+1 (555) 000-0000" />
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-ghost" onclick="closeStudentModal()">Cancel</button>
+          <button type="submit" class="btn btn-cyan">Save Student Record</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 3b. Add/Edit Teacher Modal -->
+  <div id="teacherFormModal" class="modal-overlay">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3 id="teacherModalTitle" style="font-size:1.25rem;">Register New Faculty</h3>
+        <button onclick="closeTeacherModal()"
+          style="background:none; border:none; color:var(--text-muted); cursor:pointer;">
+          <i data-lucide="x"></i>
+        </button>
+      </div>
+
+      <form id="teacherForm">
+        <div class="modal-body">
+          <input type="hidden" id="teacherFormId" />
+
+          <div class="form-group">
+            <label class="form-label">FACULTY FULL NAME</label>
+            <input type="text" id="teacherFormName" class="form-control" placeholder="e.g. Prof. Rajesh Sharma" required />
+          </div>
+
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px;">
+            <div class="form-group">
+              <label class="form-label">ASSIGNED CLASS SECTION</label>
+              <select id="teacherFormClass" class="form-control">
+                <option value="CS">CS (Computer Science)</option>
+                <option value="IT">IT (Information Technology)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">ACADEMIC TITLE</label>
+              <input type="text" id="teacherFormTitle" class="form-control" placeholder="e.g. Assistant Professor" required />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">FACULTY CAMPUS EMAIL</label>
+            <input type="email" id="teacherFormEmail" class="form-control" placeholder="faculty@attendx.edu" required />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">SUBJECT SPECIALTY</label>
+            <input type="text" id="teacherFormSpecialty" class="form-control" placeholder="e.g. Artificial Intelligence & ML" required />
+          </div>
+
+          <div class="form-group" style="margin-top:14px; padding-top:14px; border-top:1px solid var(--border-glass-subtle);">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+              <label class="form-label" style="margin-bottom:0;">PORTAL LOGIN ACCESS (ADMIN PROVISIONING)</label>
+              <span id="teacherFormAccountBadge" class="badge" style="background:rgba(234,179,8,0.15); color:var(--amber); border:1px solid rgba(234,179,8,0.3); font-size:0.75rem;">No Login Account</span>
+            </div>
+            <input type="password" id="teacherFormPassword" class="form-control" placeholder="Set password to provision portal login (leave empty for directory-only)" autocomplete="new-password" />
+            <div style="font-size:0.75rem; color:var(--text-muted); margin-top:4px;">If left blank, faculty record is saved to directory without portal login account.</div>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-ghost" onclick="closeTeacherModal()">Cancel</button>
+          <button type="submit" class="btn btn-cyan">Save Faculty Record</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 3c. Administrator Faculty Account Provisioning Modal -->
+  <div id="provisionAccountModal" class="modal-overlay">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <div style="display:flex; align-items:center; gap:10px;">
+          <div style="width:36px; height:36px; border-radius:50%; background:rgba(6,182,212,0.15); display:flex; align-items:center; justify-content:center; color:var(--cyan);">
+            <i data-lucide="shield-check" style="width:20px;height:20px;"></i>
+          </div>
+          <div>
+            <h3 style="font-size:1.2rem; margin:0;">Provision Portal Login Account</h3>
+            <p style="font-size:0.8rem; color:var(--text-muted); margin:0;">Administrative Access Control • Head: Dr. Vidya Mohod Ma’am</p>
+          </div>
+        </div>
+        <button onclick="closeProvisionAccountModal()" style="background:none; border:none; color:var(--text-muted); cursor:pointer;">
+          <i data-lucide="x"></i>
+        </button>
+      </div>
+
+      <form id="provisionAccountForm">
+        <div class="modal-body">
+          <input type="hidden" id="provisionTeacherId" />
+
+          <!-- Teacher Profile Card in Modal -->
+          <div class="glass-card" style="padding:14px; margin-bottom:16px; background:rgba(6,11,28,0.7); border:1px solid var(--border-glass-subtle);">
+            <div style="display:flex; align-items:center; gap:12px;">
+              <img id="provisionTeacherAvatar" src="assets/avatar_teacher.jpg" style="width:48px; height:48px; border-radius:50%; border:2px solid var(--cyan); object-fit:cover;" />
+              <div style="flex:1;">
+                <div id="provisionTeacherName" style="font-weight:700; color:#FFFFFF; font-size:1rem;">Prof. Swapnali Jadhav</div>
+                <div id="provisionTeacherEmail" style="font-size:0.8rem; color:var(--cyan);">swapnali.jadhav@attendx.edu</div>
+                <div id="provisionTeacherMeta" style="font-size:0.75rem; color:var(--text-muted); margin-top:2px;">Computer Science • Assistant Professor</div>
+              </div>
+              <div id="provisionCurrentStatusBadge"></div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">PORTAL LOGIN IDENTIFIER (REGISTERED EMAIL)</label>
+            <input type="text" id="provisionTeacherEmailDisplay" class="form-control" readonly style="opacity:0.85; background:rgba(255,255,255,0.03);" />
+            <div style="font-size:0.75rem; color:var(--text-muted); margin-top:4px;">Faculty must enter this registered campus email on the Smart Campus Gateway to log in.</div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">SET / RESET PORTAL PASSWORD</label>
+            <div style="position:relative; display:flex; align-items:center;">
+              <input type="password" id="provisionPassword" class="form-control" placeholder="Enter secure portal password (e.g. Swapnali@123)" required autocomplete="new-password" style="padding-right:44px;" />
+              <button type="button" id="btnToggleProvisionPassword" style="position:absolute; right:10px; background:none; border:none; color:var(--text-muted); cursor:pointer; padding:6px; display:flex; align-items:center; justify-content:center;" title="Show or hide password">
+                <i data-lucide="eye" id="toggleProvisionPassIcon" style="width:18px;height:18px;"></i>
+              </button>
+            </div>
+            <div style="font-size:0.75rem; color:var(--text-muted); margin-top:6px;">
+              Specify an explicit password. AttendX does not use default passwords or hardcoded bypasses.
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">ACCOUNT STATUS</label>
+            <select id="provisionStatus" class="form-control">
+              <option value="active">Active (Permit Portal Access)</option>
+              <option value="suspended">Suspended (Temporarily Revoke Access)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="modal-footer" style="display:flex; justify-content:space-between;">
+          <div>
+            <button type="button" id="btnRevokeAccount" class="btn btn-sm btn-danger" style="display:none;" onclick="handleRevokeTeacherAccount()">
+              <i data-lucide="user-x" style="width:14px;height:14px;"></i> Revoke Portal Access
+            </button>
+          </div>
+          <div style="display:flex; gap:10px;">
+            <button type="button" class="btn btn-ghost" onclick="closeProvisionAccountModal()">Cancel</button>
+            <button type="submit" class="btn btn-cyan">
+              <i data-lucide="shield-check" style="width:16px;height:16px;"></i> Save &amp; Provision Account
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 4. Compose Notification Modal -->
+  <div id="composeNotificationModal" class="modal-overlay">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3 style="font-size:1.25rem;">Dispatch Campus Alert</h3>
+        <button onclick="closeComposeNotificationModal()"
+          style="background:none; border:none; color:var(--text-muted); cursor:pointer;">
+          <i data-lucide="x"></i>
+        </button>
+      </div>
+
+      <form id="composeNotifForm">
+        <div class="modal-body">
+          <div class="form-group">
+            <label class="form-label">TARGET AUDIENCE</label>
+            <select id="notifFormTarget" class="form-control">
+              <option value="ALL">Entire Campus (CS & IT Classes)</option>
+              <option value="CS">Computer Science (CS)</option>
+              <option value="IT">Information Technology (IT)</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">ALERT SEVERITY / CATEGORY</label>
+            <select id="notifFormType" class="form-control">
+              <option value="absent">Absence Alert (High Priority)</option>
+              <option value="warning">Low Attendance Caution (&lt;75%)</option>
+              <option value="late">Late Arrival Notice</option>
+              <option value="report">Attendance Report Publication</option>
+              <option value="present">General Academic Broadcast</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">NOTIFICATION TITLE</label>
+            <input type="text" id="notifFormTitle" class="form-control"
+              placeholder="e.g. Urgent Attendance Review Scheduled" required />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">DISPATCH MESSAGE</label>
+            <textarea id="notifFormMessage" class="form-control" rows="3"
+              placeholder="Enter notification statement transmitted to guardians..." required></textarea>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-ghost" onclick="closeComposeNotificationModal()">Cancel</button>
+          <button type="submit" class="btn btn-cyan">
+            <i data-lucide="send" style="width:16px;height:16px;"></i> Transmit Notification
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 5. Day Details / Profile Modal -->
+  <div id="dayDetailsModal" class="modal-overlay">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3 id="dayDetailsTitle" style="font-size:1.25rem;">Details</h3>
+        <button onclick="document.getElementById('dayDetailsModal').classList.remove('active')"
+          style="background:none; border:none; color:var(--text-muted); cursor:pointer;">
+          <i data-lucide="x"></i>
+        </button>
+      </div>
+
+      <div class="modal-body" id="dayDetailsBody">
+        <!-- Injected via JS -->
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-cyan"
+          onclick="document.getElementById('dayDetailsModal').classList.remove('active')">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6. Firebase Cloud Database Settings Modal -->
+  <div id="firebaseSettingsModal" class="modal-overlay">
+    <div class="modal-dialog" style="max-width: 580px;">
+      <div class="modal-header">
+        <div style="display:flex; align-items:center; gap:10px;">
+          <div style="width:36px; height:36px; border-radius:10px; background:rgba(255,153,0,0.15); display:flex; align-items:center; justify-content:center; border:1px solid rgba(255,153,0,0.4);">
+            <i data-lucide="database" style="color:#FFA000; width:20px; height:20px;"></i>
+          </div>
+          <div>
+            <h3 style="font-size:1.15rem; margin:0;">Firebase Cloud Database</h3>
+            <span style="font-size:0.75rem; color:var(--text-muted);">Real-time Cloud Sync & Multi-Device Alert Bridge</span>
+          </div>
+        </div>
+        <button onclick="closeFirebaseModal()" style="background:none; border:none; color:var(--text-muted); cursor:pointer;">
+          <i data-lucide="x"></i>
+        </button>
+      </div>
+
+      <div class="modal-body" style="display:flex; flex-direction:column; gap:16px;">
+        <!-- Status Box -->
+        <div style="background:rgba(15,23,42,0.6); border:1px solid rgba(255,255,255,0.08); border-radius:12px; padding:14px; display:flex; justify-content:space-between; align-items:center;">
+          <div>
+            <div style="font-size:0.75rem; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.5px;">Connection Status</div>
+            <div id="fbModalStatusText" style="font-size:1rem; font-weight:700; color:#10B981; display:flex; align-items:center; gap:8px; margin-top:2px;">
+              <span id="fbModalStatusDot" style="width:10px; height:10px; border-radius:50%; background:#10B981; display:inline-block; box-shadow:0 0 8px #10B981;"></span>
+              <span id="fbModalStatusLabel">Cloud Firestore Active</span>
+            </div>
+          </div>
+          <div style="text-align:right;">
+            <div style="font-size:0.75rem; color:var(--text-muted);">Active Project ID</div>
+            <div id="fbModalProjectId" style="font-family:'JetBrains Mono', monospace; font-size:0.85rem; color:var(--cyan); font-weight:600;">attendx-smart-campus</div>
+          </div>
+        </div>
+
+        <!-- Sync Collections Info -->
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+          <div style="background:rgba(6,11,28,0.5); padding:10px; border-radius:8px; border:1px solid rgba(0,240,255,0.15);">
+            <div style="font-size:0.75rem; color:var(--text-muted);">Real-time Collections</div>
+            <div style="font-size:0.82rem; font-weight:600; color:#F8FAFC; margin-top:4px; display:flex; flex-wrap:wrap; gap:4px;">
+              <span class="badge badge-cyan" style="font-size:0.7rem;">attendance_sessions</span>
+              <span class="badge badge-cyan" style="font-size:0.7rem;">notifications</span>
+              <span class="badge badge-cyan" style="font-size:0.7rem;">students</span>
+              <span class="badge badge-cyan" style="font-size:0.7rem;">messages</span>
+            </div>
+          </div>
+          <div style="background:rgba(6,11,28,0.5); padding:10px; border-radius:8px; border:1px solid rgba(0,240,255,0.15);">
+            <div style="font-size:0.75rem; color:var(--text-muted);">Last Cloud Sync</div>
+            <div id="fbModalLastSync" style="font-size:0.82rem; font-family:'JetBrains Mono', monospace; color:var(--text-muted); margin-top:6px;">Just now</div>
+            <div style="font-size:0.75rem; color:#10B981; margin-top:4px;">● Multi-Device Stream Active</div>
+          </div>
+        </div>
+
+        <!-- Form to view/update config -->
+        <div style="border-top:1px solid rgba(255,255,255,0.08); padding-top:14px;">
+          <label style="font-size:0.8rem; font-weight:600; color:#F8FAFC; display:flex; justify-content:space-between; margin-bottom:6px;">
+            <span>Custom Firebase Project Credentials</span>
+            <span style="font-size:0.75rem; color:var(--text-muted); font-weight:normal;">(Optional - for custom Firebase Console)</span>
+          </label>
+          <div style="display:flex; flex-direction:column; gap:8px;">
+            <input type="text" id="fbInputApiKey" class="search-input" style="width:100%; font-size:0.8rem; font-family:'JetBrains Mono', monospace;" placeholder="API Key (apiKey)" />
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+              <input type="text" id="fbInputProjectId" class="search-input" style="font-size:0.8rem; font-family:'JetBrains Mono', monospace;" placeholder="Project ID (projectId)" />
+              <input type="text" id="fbInputAuthDomain" class="search-input" style="font-size:0.8rem; font-family:'JetBrains Mono', monospace;" placeholder="Auth Domain (authDomain)" />
+            </div>
+            <input type="text" id="fbInputAppId" class="search-input" style="width:100%; font-size:0.8rem; font-family:'JetBrains Mono', monospace;" placeholder="App ID (appId)" />
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px;">
+        <button type="button" class="btn btn-sm btn-ghost" onclick="resetFirebaseToDefaults()">
+          <i data-lucide="rotate-ccw" style="width:14px;height:14px;"></i> Reset Defaults
+        </button>
+        <div style="display:flex; gap:8px;">
+          <button type="button" class="btn btn-sm btn-ghost" onclick="seedFirebaseCloudData()">
+            <i data-lucide="cloud-upload" style="width:14px;height:14px;"></i> Seed Cloud Data
+          </button>
+          <button type="button" class="btn btn-sm btn-cyan" onclick="saveCustomFirebaseConfig()">
+            <i data-lucide="check" style="width:14px;height:14px;"></i> Save & Reconnect
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Firebase Cloud SDK (Official Google CDN v10 Compat) -->
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+
+  <!-- JavaScript Modules -->
+  <script src="js/firebase-config.js"></script>
+  <script src="js/firebase-service.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/store.js"></script>
+  <script src="js/charts.js"></script>
+  <script src="js/app.js"></script>
+
+  <!-- Interactive Live Simulator Script -->
+  <script>
+    let simCurrentStatus = "present";
+
+    function simulateSelect(status) {
+      simCurrentStatus = status;
+      const btns = ["simBtnPresent", "simBtnAbsent", "simBtnLate"];
+      btns.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.classList.remove("active-present", "active-absent", "active-late");
+      });
+
+      const activeBtn = document.getElementById(`simBtn${status.charAt(0).toUpperCase() + status.slice(1)}`);
+      if (activeBtn) activeBtn.classList.add(`active-${status}`);
+    }
+
+    function runLiveSimulator() {
+      const screen = document.getElementById("simParentScreen");
+      let icon = "check-circle";
+      let color = "var(--emerald)";
+      let heading = "Attendance Confirmed";
+      let text = "Vaishnavi Chavan is marked Present in Computer Science.";
+
+      if (simCurrentStatus === "absent") {
+        icon = "alert-circle";
+        color = "var(--coral)";
+        heading = "🔴 URGENT: Absence Alert";
+        text = "Your child Vaishnavi Chavan was marked ABSENT today in Computer Science. Parent Rajaram Chavan notified.";
+      } else if (simCurrentStatus === "late") {
+        icon = "clock";
+        color = "var(--amber)";
+        heading = "🟡 Late Arrival Recorded";
+        text = "Vaishnavi Chavan arrived late for lecture at 09:48 AM.";
+      }
+
+      screen.innerHTML = `
+        <div style="animation: toastSlideIn 0.4s ease; padding:12px; background:rgba(6,11,28,0.9); border-radius:12px; border:1px solid ${color}; width:100%;">
+          <div style="display:flex; align-items:center; gap:8px; color:${color}; font-weight:700; margin-bottom:6px;">
+            <i data-lucide="${icon}" style="width:20px;height:20px;"></i>
+            <span>${heading}</span>
+          </div>
+          <div style="font-size:0.85rem; color:#F8FAFC; text-align:left; line-height:1.4;">
+            ${text}
+          </div>
+          <div style="margin-top:10px; display:flex; justify-content:space-between; align-items:center; font-size:0.75rem; color:var(--text-muted);">
+            <span>Just now • Push Notification</span>
+            <span class="badge badge-cyan">DELIVERED</span>
+          </div>
+        </div>
+      `;
+
+      if (window.lucide) window.lucide.createIcons();
+      showToast("Telemetry Dispatched", `Parent alert generated for status: ${simCurrentStatus.toUpperCase()}`, simCurrentStatus === "absent" ? "danger" : (simCurrentStatus === "late" ? "warning" : "success"));
+    }
+  </script>
+</body>
+
+</html>
