@@ -67,6 +67,31 @@ http://localhost:8080
 
 ---
 
+## 🌐 1-Click Cloud Deployments
+
+### 1. GitHub Pages (Live Static Frontend)
+Deploy directly on GitHub Pages with zero external dependencies:
+- **Live URL:** [https://chavanvaishnavi3308-byte.github.io/Attenadance-Monitoring-/](https://chavanvaishnavi3308-byte.github.io/Attenadance-Monitoring-/)
+- Automatically deployed via GitHub Actions workflow (`.github/workflows/deploy-pages.yml`).
+- To activate in GitHub: Go to **Settings** > **Pages** > **Build and deployment** > Source: **GitHub Actions** (or Branch: **main** / root).
+
+### 2. Vercel (Production Frontend Edge Network)
+Deploy the frontend to Vercel's global CDN:
+- Click to deploy: [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fchavanvaishnavi3308-byte%2FAttenadance-Monitoring-)
+- Or via Vercel CLI: `npx vercel`
+
+### 3. Render (Cloud Node.js Backend Web Service)
+Deploy the Node.js backend server with health check:
+- Click to deploy: [![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/chavanvaishnavi3308-byte/Attenadance-Monitoring-)
+- Configured automatically via [`render.yaml`](render.yaml).
+
+### 4. Railway (Full-Stack Cloud Container)
+Deploy on Railway with auto-healing and persistent networking:
+- Click to deploy: [![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/template?template=https%3A%2F%2Fgithub.com%2Fchavanvaishnavi3308-byte%2FAttenadance-Monitoring-)
+- Configured via [`railway.json`](railway.json).
+
+---
+
 ## 👥 Pre-Configured Demo Stakeholder Accounts
 
 Click any 1-click demo profile in the **Authentication Modal** to test:
@@ -120,3 +145,4 @@ Click any 1-click demo profile in the **Authentication Modal** to test:
 
 ## 📄 License
 This project is developed for educational and academic capstone demonstration purposes.
+

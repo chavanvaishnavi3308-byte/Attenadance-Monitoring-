@@ -2,7 +2,7 @@ const http = require("http");
 const fs = require("fs");
 const path = require("path");
 
-const PORT = 8080;
+const PORT = process.env.PORT || 8080;
 const ROOT = __dirname;
 
 const MIME_TYPES = {
@@ -69,6 +69,6 @@ server.on("error", (err) => {
   console.error("Server error:", err);
 });
 
-server.listen(PORT, () => {
-  console.log(`AttendX server running reliably at http://localhost:${PORT}/`);
+server.listen(PORT, "0.0.0.0", () => {
+  console.log(`AttendX server running reliably on port ${PORT}`);
 });
